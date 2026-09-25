@@ -21,7 +21,8 @@ binary and tests. It stays minimal on purpose, so that actions tested
 against it exercise their own behaviour rather than a complex build:
 
 - No dependencies, so building it needs no crate downloads.
-- A committed `Cargo.lock`, so every Cargo command runs with `--locked`.
+- A committed `Cargo.lock`, so consumers that pass `--locked`, as
+  rust-crate-publish-action does, find the lockfile they require.
 - Complete crates.io metadata, so packaging reports no warnings.
 - An `include` list that keeps the packaged `.crate` to the sources,
   tests, this README and the licence.
@@ -56,7 +57,7 @@ cargo fmt --check
 cargo clippy --all-targets --locked -- -D warnings
 cargo test --locked
 cargo package --locked
-cargo run -- Cargo
+cargo run --locked -- Cargo
 ```
 
 `.github/workflows/testing.yaml` runs the same checks on every pull
